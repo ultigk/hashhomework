@@ -1,18 +1,20 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <fstream>
+#include <string>
+#include "Hash.h"
 
-
-
-class HashTable
+int main()
 {
-public:
-    void Add(const std::string& vew_string);
-    bool Has(const std::string& string) const;
-    void Remove(const std::string& string);
-    int GetHash(const std::string& string) const;
-    const auto& GetData() const
-    {
-        return data_;
-    }
+    std::ofstream fout;
+    HashTable Hash;
+    std::string string;
+    std::cin >> string;
+    fout.open("outfile.csv");
+    fout << Hash.GetHash1(string) << std::endl;
+    fout.close();
+    return 0;
+}
 
-private:
-    std::vector<std::vector<std::string>> data_;
-};
+
