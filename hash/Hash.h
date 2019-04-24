@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
@@ -8,7 +8,6 @@ class HashTable
 {
 public:
     HashTable();
-    //virtual~ HashTable();
     void Add(const std::string& new_string);
     bool Has(const std::string& string) const;
     void Remove(const std::string& string);

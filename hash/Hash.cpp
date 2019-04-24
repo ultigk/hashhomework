@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <vector>
 #include <cstring>
 #include <string.h>
@@ -13,8 +13,6 @@ HashTable::HashTable()
         data_.push_back(feel_my_holes);
     }
 }
-
-//virtual~ HashTable::HashTable()
 
 const auto& HashTable::GetData() const
 {
@@ -41,27 +39,14 @@ void HashTable::Add(const std::string& new_string)
 
 bool HashTable::Has(const std::string& string) const
 {
-   /* const int hash = GetHash(value);
-    const std::vector<std::string>& busket = data_[hash];
-
-    if (strstr(string, data_))
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-    */
-
     for (size_t i = 0; i < data_[GetHash(string)].size(); i++)
     {
         if (data_[GetHash(string)][i] == string)
         {
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 void HashTable::Remove(const std::string& string)
@@ -70,7 +55,7 @@ void HashTable::Remove(const std::string& string)
     {
         if (data_[GetHash(string)][i] == string)
         {
-            data_.erase(data_.begin() + i); // 1 àðãóìåíò - óäàëåíèå íà óêàçàííîé ïîçèöèè 
+            data_.erase(data_.begin() + i); // 1 Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚ - ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð½Ð° ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ð¾Ð¹ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ð¸ 
         }
         else
         {
@@ -81,7 +66,7 @@ void HashTable::Remove(const std::string& string)
 
 int HashTable::GetHash(const std::string& string) const
 {
-    return GetHash1(string) % data_.size(); // ãäå data_.size() == 1013 â íàøåé çàäà÷å
+    return GetHash6(string) % data_.size(); // Ð³Ð´Ðµ data_.size() == 1013 Ð² Ð½Ð°ÑˆÐµÐ¹ Ð·Ð°Ð´Ð°Ñ‡Ðµ
 }
 
 int GetHash1(const std::string& string)
@@ -133,12 +118,18 @@ int GetHash6(const std::string& string)
     {
         return 1;
     }
-    if (string.size() == 1)
+    /*if (string.size() == 1)
     {
         return (int)string[0];
-    }
-    else
-    {
-        return GetHash6(string) << 1 ^ string[string.size()];
-    }
+    }*/
+    //else
+    //{
+        //return GetHash6(string) << 1 ^ string[string.size()];
+        int hash = (int)string[0];
+        for (size_t i = 1; i < string.size(); i++)
+        {
+            hash = (hash << 1) ^ (int)string[i];
+        }
+    //}
+        return hash;
 }
